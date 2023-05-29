@@ -54,6 +54,15 @@ public class BookController {
 	public String save(@ModelAttribute Book book){
 	
 	service.save(book);	
+	List<MyBookList> list=myBookListRepo.getAll();
+	for(MyBookList e: list) {
+		if(book.getId()==e.getId()) {
+			myBookListRepo.save(new MyBookList(book.getId(),book.getName(),book.getAuthor(),book.getPrice()));
+			System.out.println("inside if condition");
+		}
+		System.out.println("inside for loop");
+	}
+	System.out.println("outside for  loop");
 	return "redirect:/available_books";
 	}
 	
@@ -76,7 +85,7 @@ public class BookController {
 	public String editBookById(@PathVariable("id") int id,Model model) {
 		
 		Book book=service.getById(id);
-		model.addAttribute("book", book);
+		model.addAttribute("book", book); 
 		return "editBook";
 	}
 }
