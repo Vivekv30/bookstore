@@ -58,11 +58,8 @@ public class BookController {
 	for(MyBookList e: list) {
 		if(book.getId()==e.getId()) {
 			myBookListRepo.save(new MyBookList(book.getId(),book.getName(),book.getAuthor(),book.getPrice()));
-			System.out.println("inside if condition");
-		}
-		System.out.println("inside for loop");
+		}	
 	}
-	System.out.println("outside for  loop");
 	return "redirect:/available_books";
 	}
 	
